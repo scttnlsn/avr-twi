@@ -4,11 +4,9 @@ Nonblocking TWI/I2C master driver for Atmel AVR
 
 ## API
 
-###### `void twi_init(uint32_t f_scl)`
+###### `void twi_init()`
 
 Initializes the driver.  Should be called once before calling any other TWI functions.
-
-* `f_scl` - SCL clock frequency (e.g. 100kHz is typical for Atmega328)
 
 ###### `void twi_write(uint8_t address, uint8_t* data, uint8_t length, void (*callback)(uint8_t address, uint8_t *data))`
 
@@ -45,3 +43,9 @@ This will block until the current operation (read or write) completes or return 
     twi_wait();
     twi_read(address, 2, NULL);
     uint8_t *result = twi_wait();
+
+## Definitions
+
+* `F_CPU` - you should define this before including this library
+* `TWI_FREQ` - defaults to 100kHz if left undefined
+* `TWI_BUFFER_LENGTH` - defaults to 32 if left undefined

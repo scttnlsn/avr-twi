@@ -7,14 +7,14 @@
 
 static volatile uint8_t busy;
 static struct {
-  uint8_t buffer[100];
+  uint8_t buffer[TWI_BUFFER_LENGTH];
   uint8_t length;
   uint8_t index;
   void (*callback)(uint8_t, uint8_t *);
 } transmission;
 
-void twi_init(uint32_t f_scl) {
-  TWBR = ((F_CPU / f_scl) - 16) / 2;
+void twi_init() {
+  TWBR = ((F_CPU / TWI_FREQ) - 16) / 2;
   TWSR = 0; // prescaler = 1
 
   busy = 0;
